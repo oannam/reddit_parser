@@ -1,0 +1,5 @@
+backoff==1.8.0
+flask==1.0.2
+flasgger==0.9.2
+flask-pymongo==2.2.0
+pymongo==3.7.2

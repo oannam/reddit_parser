@@ -1,0 +1,15 @@
+DEFAULT:
+  WEBSERVER:
+    HOST: localhost
+    PORT: 8080
+    DEBUG: true
+  DB:
+    URI: mongodb://mongodb:27017/reddit
+
+TEST:
+  WEBSERVER:
+    HOST: localhost
+    PORT: 8080
+    DEBUG: true
+  DB:
+    URI: mongodb://localhost:27017/reddit
