@@ -4,7 +4,7 @@ from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 swagger = Swagger(app)
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/reddit'
+app.config['MONGO_URI'] = 'mongodb://mongodb:27017/reddit'
 mongo = PyMongo(app)
 
 from app import routes

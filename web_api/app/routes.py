@@ -2,9 +2,8 @@
 Python 2.7 API to get Reddit sumbissions and comments
 """
 
-from flask import request, jsonify
+from flask import request
 import json
-from bson import BSON
 from bson import json_util
 from app import app, mongo
 from app import utils
@@ -71,13 +70,16 @@ def get_items():
             subreddit, from_date, to_date, keyword, 'text'
     )
 
-    log.info('Query DB for submissions')
-    cursor = mongo.db['submissions'].find(submissions_condition)
-    submissions_objects_list = [item for item in cursor]
-
-    log.info('Query DB for submissions')
-    cursor = mongo.db['comments'].find(comments_condition)
-    comments_objects_list = [item for item in cursor]
+    submissions_objects_list = utils.retrieve_objects_from_db(
+        mongo,
+        'submissions',
+        submissions_condition
+    )
+    comments_objects_list = utils.retrieve_objects_from_db(
+        mongo,
+        'comments',
+        comments_condition
+    )
 
     merged_items = utils.merge_timestamp_sorted_dict_lists(
         submissions_objects_list,
