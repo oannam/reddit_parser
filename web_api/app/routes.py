@@ -8,7 +8,11 @@ from bson import BSON
 from bson import json_util
 from app import app, mongo
 from app import utils
-from app import logger
+from logger import logger
+
+
+log = logger.create_logger(__name__)
+
 
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
@@ -16,7 +20,7 @@ def index():
     return "Hello, this is Murarasu's Reddit Sumission and Comments API"
 
 
-@app.route("/items/", methods=['GET'])
+@app.route('/items/', methods=['GET'])
 def get_items():
     """
     Call this api method by passing the parameters: subreddit, from, and to
@@ -49,19 +53,6 @@ def get_items():
         description: Error!
       200:
         description: All the submissions and comments that match the query parameters
-        schema:
-          id: awesome
-          properties:
-            language:
-              type: string
-              description: The language name
-              default: Lua
-            features:
-              type: array
-              description: The awesomeness list
-              items:
-                type: string
-              default: ["perfect", "simple", "lovely"]
     """
     query_parameters = request.args
 
@@ -77,17 +68,15 @@ def get_items():
             subreddit, from_date, to_date, keyword, 'title'
     )
     comments_condition = utils.create_query_condition(
-            subreddit, from_date, to_date, keyword, 'body'
+            subreddit, from_date, to_date, keyword, 'text'
     )
 
+    log.info('Query DB for submissions')
     cursor = mongo.db['submissions'].find(submissions_condition)
-
-    #print json.dumps(cursor.explain(), sort_keys=True, indent=4, default=json_util.default)
-
     submissions_objects_list = [item for item in cursor]
 
+    log.info('Query DB for submissions')
     cursor = mongo.db['comments'].find(comments_condition)
-
     comments_objects_list = [item for item in cursor]
 
     merged_items = utils.merge_timestamp_sorted_dict_lists(
@@ -95,4 +84,11 @@ def get_items():
         comments_objects_list
     )
 
-    return json.dumps(merged_items, sort_keys=True, indent=4, default=json_util.default)
+    return json.dumps(
+        {'items': merged_items},
+        sort_keys=False,
+        indent=4,
+        default=json_util.default
+    )
+
+#print json.dumps(cursor.explain(), sort_keys=True, indent=4, default=json_util.default)

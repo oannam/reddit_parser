@@ -8,6 +8,10 @@ list of given subreddits and then submits them into a database
 
 Checkout reddit_parser/config.yaml for configuration insights.
 
+In order to run the parser, you need a MongoDB instance which you need to configure
+in the parser config.yaml and reddit user, passord, application id and application
+secret.
+
 Run example: ``python parser.py --config_section TEST``
 
 ## web_api
@@ -17,10 +21,18 @@ keyword.
 
 Checkout web_api/config.yaml for configuration insights.
 
-Run example: ``python app.py``
+
+In order to run the web_api, you need a MongoDB instance which you need to configure
+in the web_api config.yaml
+
+Run example: ``python bootstrap.py --config_section TEST``
 
 It runs on localhost:8080 by default. If you want to try the API you can run it and
 then go to: ``http://localhost:8080/apidocs``
+
+Or use: 
+
+``curl -X GET "http://localhost:8080/items/?subreddit=stories&from=1546300800&to=1552748591" -H "accept: application/json"``
 
 ## mongo
 This part consists of a dockerfile for a MongoDB instance.
@@ -31,3 +43,15 @@ In order to build all the cotainers:
 
 In order to run all the containers:
 ``docker-compose up``
+
+## Unit tests
+
+In order to run unit tests, you need to:
+
+```
+pip install mock
+cd reddit_parser/
+python -m unittest discover -v
+cd web_api/
+python -m unittest discover -v
+```
