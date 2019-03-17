@@ -4,16 +4,16 @@ services:
     build: mongo/
     ports:
       - "27017:27017"
-#  mongodb:
-#    image: mongo
-#    ports:
-#      - "27017:27017"
+    networks:
+      - default
   reddit_parser:
     build: reddit_parser/
     depends_on:
       - mongodb
     links:
       - mongodb
+    networks:
+      - default
   web_api:
     build: web_api/
     depends_on:
@@ -23,3 +23,8 @@ services:
       - "8080:8080"
     links:
       - mongodb
+    networks:
+      - default
+networks:
+  default:
+    driver: bridge
