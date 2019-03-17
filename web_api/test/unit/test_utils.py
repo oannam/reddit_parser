@@ -13,6 +13,13 @@ class TestUtilsModule(unittest.TestCase):
         wanted_merged_list = [{'created': x} for x in range(8, 0, -1)]
         self.assertEqual(merged_list, wanted_merged_list)
 
+    def test_merge_timestamp_empty_sorted_dict_lists(self):
+        list1 = []
+        list2 = []
+        merged_list = utils.merge_timestamp_sorted_dict_lists(list1, list2)
+        wanted_merged_list = []
+        self.assertEqual(merged_list, wanted_merged_list)
+
     def test_create_query_condition(self):
         subreddit = 'stories'
         from_date = 1
