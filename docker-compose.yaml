@@ -1,0 +1,25 @@
+version: "3"
+services:
+  mongodb:
+    build: mongo/
+    ports:
+      - "27017:27017"
+#  mongodb:
+#    image: mongo
+#    ports:
+#      - "27017:27017"
+  reddit_parser:
+    build: reddit_parser/
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+  web_api:
+    build: web_api/
+    depends_on:
+      - mongodb
+      - reddit_parser
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb
