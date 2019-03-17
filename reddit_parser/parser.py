@@ -13,9 +13,9 @@ from requests import exceptions as requests_exceptions
 import time
 import yaml
 
-DEFAULT = "DEFAULT"
-TEST = "TEST"
-DEV = "DEV"
+DEFAULT = 'DEFAULT'
+TEST = 'TEST'
+DEV = 'DEV'
 
 # logger to be used throughout the script
 logger = logging.getLogger(__name__)
@@ -73,7 +73,7 @@ class Singleton(type):
 
 
 class Config(object):
-    """Config object that reads the config from given yaml and section"""
+    """Config that reads the configuration from given yaml and section"""
     __metaclass__ = Singleton
 
     def __init__(self, config_file, section=DEFAULT):
@@ -291,7 +291,7 @@ def initialize_database(db_client, collections, field):
 
 def particularize_argument_parser():
     """
-    Provide al needed arguments for an argument parser
+    Provide all needed arguments for an argument parser
     :return: an argument parser with all needed arguments
     """
     parser = argparse.ArgumentParser()
