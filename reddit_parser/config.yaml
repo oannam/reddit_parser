@@ -1,0 +1,47 @@
+DEFAULT:
+  REDDIT:
+    USER: <user>
+    PASSWORD: <password>
+    APP_ID: <app_id>
+    APP_SECRET: <app_secret>
+    USER_AGENT: Murarasu's Reddit Parser 1.0
+    SUBREDDITS:
+      - stories
+      - diet
+      - jokes
+    QUERY_LIMIT: 10
+
+  DB:
+    HOST: mongodb
+    PORT: 27017
+    NAME: reddit
+    COLLECTIONS:
+      - submissions
+      - comments
+
+  PARSER:
+    RUN_FREQUENCY: 60
+
+TEST:
+  REDDIT:
+    USER: <user>
+    PASSWORD: <password>
+    APP_ID: <app_id>
+    APP_SECRET: <app_secret>
+    USER_AGENT: Murarasu's Reddit Parser 1.0
+    SUBREDDITS:
+      - stories
+      - diet
+      - jokes
+    QUERY_LIMIT: 50
+
+  DB:
+    HOST: localhost
+    PORT: 27017
+    NAME: reddit
+    COLLECTIONS:
+      - submissions
+      - comments
+
+  PARSER:
+    RUN_FREQUENCY: 60
