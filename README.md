@@ -44,6 +44,9 @@ In order to build all the cotainers:
 In order to run all the containers:
 ``docker-compose up``
 
+The docker container logs will be saved in the working directory. Checkout the 
+docker-compose file for details.
+
 ## Unit tests
 
 In order to run unit tests, you need to:
