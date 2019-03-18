@@ -9,4 +9,6 @@ COPY parser.py .
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD python parser.py --config_section DEFAULT
+RUN mkdir /var/log/reddit_parser
+
+CMD python parser.py --config_section DEFAULT > /var/log/reddit_parser/parser.log 2>&1

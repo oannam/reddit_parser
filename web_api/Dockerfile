@@ -9,4 +9,6 @@ EXPOSE 8080
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-CMD python bootstrap.py --config_section DEFAULT
+RUN mkdir /var/log/web_api
+
+CMD python bootstrap.py --config_section DEFAULT > /var/log/web_api/bootstrap.log 2>&1
